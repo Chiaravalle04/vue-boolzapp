@@ -6,8 +6,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!--Fonts-->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;700&display=swap" rel="stylesheet">
 
         <!--Fontawesome-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <!-- Vue CDN-->
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
         <!--Style CSS-->
         <link rel="stylesheet" href="css/style.css">
@@ -17,11 +24,198 @@
 
     <body>
 
-        <main> <!--Inizio Main-->
+        <div id="app">
+            
+            <main class="flex"> <!--Inizio Main-->
+                
+                <aside> <!-- Inizio Aside-->
 
+                    <div class="profile-container flex ai-center"> <!-- Contenitore Profilo -->
 
+                        <div class="profile flex ai-center">
 
-        </main> <!--Fine Main-->
+                            <img src="img/avatar_io.jpg" alt="Foto Profilo">
+
+                            <span>Sofia</span>
+                        
+                        </div>
+
+                        <div class="icon-container">
+
+                            <button>
+
+                                <i class="fa-solid fa-circle-notch fa-lg"></i>
+
+                            </button>
+
+                            <button>
+
+                                <i class="fa-solid fa-message fa-lg"></i>
+
+                            </button>
+
+                            <button>
+
+                                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="alert flex ai-center"> <!-- Contenitore Alert -->
+
+                        <span>
+
+                            <i class="fa-solid fa-bell-slash fa-xl"></i>
+
+                        </span>
+
+                        <div class="alert-text">
+                            
+                            <h2>Ricevi notifiche dei nuovi messaggi</h2>
+                            
+                            <a href="#">Attiva notifiche desktop</a>
+                            
+                        </div>
+
+                    </div>
+
+                    <div class="search-bar-container flex ai-center"> <!-- Contenitore Search Bar -->
+
+                        <span>
+
+                            <i class="fa-solid fa-magnifying-glass"></i>
+
+                        </span>
+
+                        <input type="search" placeholder="Cerca o inizia una nuova chat">
+
+                    </div>
+
+                    <div class="container-chats"> <!-- Contenitore Chats -->
+
+                        <ul>
+
+                            <li class="flex ai-center" v-for="(item, index) in contacts">
+
+                                <div class="profile-chat flex ai-center">
+                                    
+                                    <img :src="'img/avatar' + contacts[index].avatar + '.jpg'" :alt="'Foto profilo' + ' ' + contacts[index].name ">
+                                    
+                                    <div class="text-chat">
+                                        
+                                        <h2> {{ contacts[index].name }}</h2>
+                                        
+                                        <p> {{ contacts[index].messages[contacts[index].messages.length - 1].message }} </p>
+                                        
+                                    </div>
+                                    
+                                </div>
+
+                                <span>12:30</span>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </aside>
+
+                <div class="messages-container"> <!-- Contenitore Messaggi -->
+
+                    <div class="header-messages-container flex ai-center">
+
+                        <div class="main-profile-chat flex ai-center">
+
+                            <img :src="'img/avatar' + contacts[0].avatar + '.jpg'" :alt="'Foto profilo' + ' ' + contacts[0].name ">
+
+                            <div class="main-name-chat">
+
+                                <h2> {{ contacts[0].name }}</h2>
+                                
+                                <span>Ultimo accesso oggi alle 13:00</span>
+
+                            </div>
+                        
+                        </div>
+
+                        <div class="icon-container">
+
+                            <button>
+
+                                <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+
+                            </button>
+
+                            <button>
+
+                                <i class="fa-solid fa-paperclip fa-lg"></i>
+                            </button>
+
+                            <button>
+
+                                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <div class="main-messages-container">
+
+                        <ul class="flex">
+
+                            <li class="flex align-end sent-mes">
+
+                                <p> {{ contacts[2].messages[0].message }} </p> 
+
+                                <span>20:00</span>
+
+                            </li>
+
+                            <li class="flex received-mes">
+
+                                <p> Perfetto! </p> 
+
+                                <span>20:00</span>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                    <div class="footer-messages-container flex ai-center">
+
+                        <button>
+
+                            <i class="fa-regular fa-face-smile fa-xl"></i>
+
+                        </button>
+
+                        <div class="input-message">
+
+                            <input type="text" placeholder="Scrivi un messaggio...">
+
+                        </div>
+
+                        <button>
+
+                            <i class="fa-solid fa-microphone fa-xl"></i>
+
+                        </button>
+
+                    </div>
+                    
+                </div>
+                
+            </main> <!--Fine Main-->
+            
+        </div>
 
         <script text="text/javascript" src="js/scripts.js"></script>
 
