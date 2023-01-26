@@ -40,6 +40,10 @@
     align-self: end;
 }
 
+.align-start {
+    align-self: flex-start;
+}
+
 .sent-mes {
     background-color: #D9FDD3;
 }
@@ -50,6 +54,10 @@
 
 ul {
     list-style: none;
+}
+
+.none {
+    display: none;
 }
 
 /* ----------------------------------------------------------------------- */
@@ -178,6 +186,7 @@ aside {
     padding: 12.5px 20px;
     justify-content: space-between;
     border-top: 1px solid #F0F2F5;
+    cursor: pointer;
 }
 
 .container-chats ul li:hover {
@@ -250,6 +259,7 @@ aside {
     height: calc(100% - 130px);
     background-image: url('../img/mine.jpg');
     overflow: auto;
+    padding: 60px;
 }
 
 .main-messages-container ul {
@@ -257,21 +267,24 @@ aside {
 }
 
 .main-messages-container ul li {
-    width: 30%;
-    padding: 10px;
-    margin: 10px 60px;
+    min-width: 30%;
+    max-width: 60%;
+    padding: 15px 20px;
+    margin: 2px 0;
     border-radius: 10px;
     position: relative;
+    flex-wrap: wrap;
 }
 
 .main-messages-container ul li p {
     font-size: 13px;
+    word-break: break-all;
 }
 
 .main-messages-container ul li span {
     position: absolute;
-    bottom: 5px;
-    right: 10px;
+    bottom: 3px;
+    right: 5px;
     font-size: 10px;
 }
 

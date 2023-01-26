@@ -98,7 +98,7 @@
 
                         <ul>
 
-                            <li class="flex ai-center" v-for="(item, index) in contacts">
+                            <li class="flex ai-center" v-for="(item, index) in contacts" @click="picInd(index)">
 
                                 <div class="profile-chat flex ai-center">
                                     
@@ -130,11 +130,11 @@
 
                         <div class="main-profile-chat flex ai-center">
 
-                            <img :src="'img/avatar' + contacts[0].avatar + '.jpg'" :alt="'Foto profilo' + ' ' + contacts[0].name ">
+                            <img :src="'img/avatar' + contacts[currentContact].avatar + '.jpg'" :alt="'Foto profilo' + ' ' + contacts[0].name ">
 
                             <div class="main-name-chat">
 
-                                <h2> {{ contacts[0].name }}</h2>
+                                <h2> {{ contacts[currentContact].name }}</h2>
                                 
                                 <span>Ultimo accesso oggi alle 13:00</span>
 
@@ -169,17 +169,17 @@
 
                         <ul class="flex">
 
-                            <li class="flex align-end sent-mes">
+                            <li :class="{'flex align-end sent-mes': item.status === 'sent', none: item.status === 'received'}" v-for="(item, index) in contacts[currentContact].messages">
 
-                                <p> {{ contacts[2].messages[0].message }} </p> 
+                                <p> {{ item.message }} </p> 
 
                                 <span>20:00</span>
 
                             </li>
 
-                            <li class="flex received-mes">
+                            <li :class="{'flex align-start received-mes': item.status === 'received', none: item.status === 'sent'}" v-for="(item, index) in contacts[currentContact].messages">
 
-                                <p> Perfetto! </p> 
+                                <p> {{ item.message }} </p> 
 
                                 <span>20:00</span>
 
