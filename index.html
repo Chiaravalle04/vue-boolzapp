@@ -90,7 +90,7 @@
 
                         </span>
 
-                        <input type="search" placeholder="Cerca o inizia una nuova chat">
+                        <input type="search" placeholder="Cerca o inizia una nuova chat" v-model="searchContact">
 
                     </div>
 
@@ -98,17 +98,17 @@
 
                         <ul>
 
-                            <li class="flex ai-center" v-for="(item, index) in contacts" @click="picInd(index)">
+                            <li class="flex ai-center" v-for="(item, index) in filtredArray" @click="picInd(index)">
 
                                 <div class="profile-chat flex ai-center">
                                     
-                                    <img :src="'img/avatar' + contacts[index].avatar + '.jpg'" :alt="'Foto profilo' + ' ' + contacts[index].name ">
+                                    <img :src="'img/avatar' + item.avatar + '.jpg'" :alt="'Foto profilo' + ' ' + item.name ">
                                     
                                     <div class="text-chat">
                                         
-                                        <h2> {{ contacts[index].name }}</h2>
+                                        <h2> {{ item.name }}</h2>
                                         
-                                        <p> {{ contacts[index].messages[contacts[index].messages.length - 1].message }} </p>
+                                        <p> {{ item.messages[item.messages.length - 1].message }} </p>
                                         
                                     </div>
                                     
@@ -169,20 +169,12 @@
 
                         <ul class="flex">
 
-                            <li :class="{'flex align-end sent-mes': item.status === 'sent', none: item.status === 'received'}" v-for="(item, index) in contacts[currentContact].messages">
+                            <li v-for="(item, index) in contacts[currentContact].messages" :class="{'flex align-end sent-mes': item.status === 'sent', 'flex align-start received-mes': item.status === 'received', none: item.status !== 'sent' && item.status !== 'received'}">
 
                                 <p> {{ item.message }} </p> 
-
+                               
                                 <span>20:00</span>
-
-                            </li>
-
-                            <li :class="{'flex align-start received-mes': item.status === 'received', none: item.status === 'sent'}" v-for="(item, index) in contacts[currentContact].messages">
-
-                                <p> {{ item.message }} </p> 
-
-                                <span>20:00</span>
-
+                            
                             </li>
 
                         </ul>

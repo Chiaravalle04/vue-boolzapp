@@ -198,6 +198,18 @@ createApp({
 
             myMessage: '',
 
+            searchContact: '',
+
+        }
+
+    },
+
+    computed: {
+
+        filtredArray() {
+
+            return this.contacts.filter(word => word.name.toLowerCase().includes(this.searchContact))
+
         }
 
     },
@@ -240,8 +252,10 @@ createApp({
 
             }, 1000)
 
-        }
+        },
 
-    }
+    },
+
+    
 
 }).mount('#app');
