@@ -196,6 +196,8 @@ createApp({
             
             currentContact: 0,
 
+            myMessage: '',
+
         }
 
     },
@@ -209,6 +211,36 @@ createApp({
             return  this.currentContact = index;
 
         },
+
+        sendMessage() {
+
+            const textMyMessage = {
+                
+                // date: '10/01/2020 15:30:55',
+                message: this.myMessage,
+                status: 'sent'
+            
+            }
+
+            this.contacts[this.currentContact].messages.push(textMyMessage);
+
+            this.myMessage = '';
+
+            setTimeout(() => {
+
+                const textMessage = {
+                
+                    // date: '10/01/2020 15:30:55',
+                    message: 'Ok!',
+                    status: 'received'
+                
+                }
+
+                this.contacts[this.currentContact].messages.push(textMessage);
+
+            }, 1000)
+
+        }
 
     }
 
