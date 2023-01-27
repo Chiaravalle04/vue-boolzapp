@@ -108,13 +108,13 @@
                                         
                                         <h2> {{ item.name }}</h2>
                                         
-                                        <p> {{ item.messages[item.messages.length - 1].message }} </p>
-                                        
+                                        <p v-if="item.messages.length > 0"> {{ item.messages[item.messages.length - 1].message }} </p>
+                                                                               
                                     </div>
                                     
                                 </div>
 
-                                <span>12:30</span>
+                                <span v-if="item.messages.length > 0">{{myTime[index]}}</span>
 
                             </li>
 
@@ -130,13 +130,13 @@
 
                         <div class="main-profile-chat flex ai-center">
 
-                            <img :src="'img/avatar' + contacts[currentContact].avatar + '.jpg'" :alt="'Foto profilo' + ' ' + contacts[0].name ">
+                            <img :src="'img/avatar' + contacts[currentContact].avatar + '.jpg'" :alt="'Foto profilo' + ' ' + contacts[currentContact].name ">
 
                             <div class="main-name-chat">
 
                                 <h2> {{ contacts[currentContact].name }}</h2>
                                 
-                                <span>Ultimo accesso oggi alle 13:00</span>
+                                <span v-if="contacts[currentContact].messages.length > 0">{{'Ultimo accesso' + ' ' + contacts[currentContact].messages[contacts[currentContact].messages.length - 1].date}}</span>
 
                             </div>
                         
@@ -169,11 +169,23 @@
 
                         <ul class="flex">
 
-                            <li v-for="(item, index) in contacts[currentContact].messages" :class="{'flex align-end sent-mes': item.status === 'sent', 'flex align-start received-mes': item.status === 'received', none: item.status !== 'sent' && item.status !== 'received'}">
+                            <li v-for="(item, index) in contacts[currentContact].messages" :class="{'flex align-end sent-mes': item.status === 'sent', 'flex align-start received-mes': item.status === 'received'}">
+                                
+                                <p> {{ item.message }} </p>
+                                
+                                <span class="arrow-down" >
+                                    
+                                    <i class="fa-solid fa-chevron-down"></i>
 
-                                <p> {{ item.message }} </p> 
+                                    <div class="drop-menu-cancel-mes">
+
+                                        <p id="text-cancel-mes" @click="removeMessage(index)">Elimina messaggio</p>
+
+                                    </div>
+                                
+                                </span>
                                
-                                <span>20:00</span>
+                                <!-- <span> {{item.date}} </span> -->
                             
                             </li>
 
@@ -191,7 +203,13 @@
 
                         <div class="input-message">
 
-                            <input type="text" placeholder="Scrivi un messaggio..." v-model="myMessage" @keyup.enter="sendMessage()">
+                            <span class="send-message-icon" @click="sendMessage()" v-if="typing">
+
+                                <i class="fa-solid fa-paper-plane"></i>
+
+                            </span>
+
+                            <input type="text" placeholder="Scrivi un messaggio..." v-model="myMessage" v-on:input="typing = true" @keyup.enter="sendMessage()">
 
                         </div>
 

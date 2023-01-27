@@ -200,6 +200,10 @@ createApp({
 
             searchContact: '',
 
+            typing: false,
+
+            myTime: [],
+
         }
 
     },
@@ -208,7 +212,7 @@ createApp({
 
         filtredArray() {
 
-            return this.contacts.filter(word => word.name.toLowerCase().includes(this.searchContact))
+            return this.contacts.filter(word => word.name.toLowerCase().includes(this.searchContact.toLowerCase()))
 
         }
 
@@ -226,36 +230,64 @@ createApp({
 
         sendMessage() {
 
-            const textMyMessage = {
+            if (this.myMessage != '') {
+
+                const textMyMessage = {
                 
-                // date: '10/01/2020 15:30:55',
-                message: this.myMessage,
-                status: 'sent'
-            
-            }
-
-            this.contacts[this.currentContact].messages.push(textMyMessage);
-
-            this.myMessage = '';
-
-            setTimeout(() => {
-
-                const textMessage = {
-                
-                    // date: '10/01/2020 15:30:55',
-                    message: 'Ok!',
-                    status: 'received'
+                    date: new Date().toLocaleTimeString(),
+                    message: this.myMessage,
+                    status: 'sent'
                 
                 }
+    
+                this.contacts[this.currentContact].messages.push(textMyMessage);
+    
+                this.myMessage = '';
+    
+                setTimeout(() => {
+    
+                    const textMessage = {
+                    
+                        date: new Date().toLocaleTimeString(),
+                        message: 'Ok!',
+                        status: 'received'
+                    
+                    }
+    
+                    this.contacts[this.currentContact].messages.push(textMessage);
+    
+                }, 1000)
 
-                this.contacts[this.currentContact].messages.push(textMessage);
-
-            }, 1000)
+            }
 
         },
 
+        removeMessage(index) {
+
+            this.contacts[this.currentContact].messages.splice(index, 1);
+
+        },
+
+        myTimeFunction() {
+
+            for (let i = 0; i < this.contacts.length; i++) {
+                    
+                let lastMessage = this.contacts[i].messages[this.contacts[i].messages.length - 1];
+                
+                let time = lastMessage.date.substr(11);
+
+                this.myTime.push(time)
+                
+            }
+
+        }
+
     },
 
+    mounted() {
+        
+        this.myTimeFunction();
     
+    }
 
 }).mount('#app');

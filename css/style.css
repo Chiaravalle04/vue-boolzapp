@@ -267,9 +267,9 @@ aside {
 }
 
 .main-messages-container ul li {
-    min-width: 30%;
+    min-width: 20%;
     max-width: 60%;
-    padding: 15px 20px;
+    padding: 15px 20px 20px 20px;
     margin: 2px 0;
     border-radius: 10px;
     position: relative;
@@ -286,6 +286,38 @@ aside {
     bottom: 3px;
     right: 5px;
     font-size: 10px;
+}
+
+.main-messages-container ul li .arrow-down {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    font-size: 15px;
+    display: none;
+}
+
+.main-messages-container ul li:hover .arrow-down {
+    display: inline-block;
+}
+
+.drop-menu-cancel-mes {
+    width: 180px;
+    background-color: #F0F2F5;
+    position: absolute;
+    padding: 7px 0;
+    border-radius: 5px;
+    top: 25px;
+    right: 5px;
+    z-index: 2;
+    box-shadow: 0px 0px 15px 2px rgba(0,0,0,0.47);
+}
+
+.drop-menu-cancel-mes > #text-cancel-mes{
+    width: 100%;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 5px;
+    background-color: #FFFFFF;
 }
 
 /* Footer Messages Container */
@@ -307,11 +339,21 @@ aside {
 
 .input-message {
     width: 80%;
+    position: relative;
+}
+
+.input-message .send-message-icon {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    color: #54656F;
+    cursor: pointer;
 }
 
 .footer-messages-container .input-message input {
     display: block;
-    padding: 10px 20px;
+    padding: 10px 45px 10px 20px;
     width: 100%;
     height: 45px;
     border: none;
