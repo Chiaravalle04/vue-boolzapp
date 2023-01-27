@@ -25,205 +25,223 @@
     <body>
 
         <div id="app">
+
+            <div class="app-style" :class="{'bg-dark': !(themeColor === false)}">
             
-            <main class="flex"> <!--Inizio Main-->
-                
-                <aside> <!-- Inizio Aside-->
+                <main class="flex"> <!--Inizio Main-->
+                    
+                    <aside> <!-- Inizio Aside-->
 
-                    <div class="profile-container flex ai-center"> <!-- Contenitore Profilo -->
+                        <div class="profile-container flex ai-center" :class="{'theme-color': !(themeColor === false)}"> <!-- Contenitore Profilo -->
 
-                        <div class="profile flex ai-center">
+                            <div class="profile flex ai-center">
 
-                            <img src="img/avatar_io.jpg" alt="Foto Profilo">
+                                <img src="img/avatar_io.jpg" alt="Foto Profilo">
 
-                            <span>Sofia</span>
-                        
-                        </div>
-
-                        <div class="icon-container">
-
-                            <button>
-
-                                <i class="fa-solid fa-circle-notch fa-lg"></i>
-
-                            </button>
-
-                            <button>
-
-                                <i class="fa-solid fa-message fa-lg"></i>
-
-                            </button>
-
-                            <button>
-
-                                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                    <div class="alert flex ai-center"> <!-- Contenitore Alert -->
-
-                        <span>
-
-                            <i class="fa-solid fa-bell-slash fa-xl"></i>
-
-                        </span>
-
-                        <div class="alert-text">
+                                <span>Sofia</span>
                             
-                            <h2>Ricevi notifiche dei nuovi messaggi</h2>
-                            
-                            <a href="#">Attiva notifiche desktop</a>
-                            
-                        </div>
+                            </div>
 
-                    </div>
+                            <div class="icon-container">
 
-                    <div class="search-bar-container flex ai-center"> <!-- Contenitore Search Bar -->
+                                <button class="p-relative" @click="colorChange()">
 
-                        <span>
+                                    <i class="fa-solid fa-palette fa-lg"></i>
 
-                            <i class="fa-solid fa-magnifying-glass"></i>
+                                    <div class="theme-color-change" v-if="showMenu">
 
-                        </span>
+                                        <p @click="themeLight()">Tema Chiaro</p>
 
-                        <input type="search" placeholder="Cerca o inizia una nuova chat" v-model="searchContact">
+                                        <p @click="themeDark()">Tema Scuro</p>
 
-                    </div>
-
-                    <div class="container-chats"> <!-- Contenitore Chats -->
-
-                        <ul>
-
-                            <li class="flex ai-center" v-for="(item, index) in filtredArray" @click="picInd(index)">
-
-                                <div class="profile-chat flex ai-center">
-                                    
-                                    <img :src="'img/avatar' + item.avatar + '.jpg'" :alt="'Foto profilo' + ' ' + item.name ">
-                                    
-                                    <div class="text-chat">
-                                        
-                                        <h2> {{ item.name }}</h2>
-                                        
-                                        <p v-if="item.messages.length > 0"> {{ item.messages[item.messages.length - 1].message }} </p>
-                                                                               
                                     </div>
-                                    
-                                </div>
 
-                                <span v-if="item.messages.length > 0">{{myTime[index]}}</span>
+                                </button>
 
-                            </li>
+                                <button>
 
-                        </ul>
+                                    <i class="fa-solid fa-circle-notch fa-lg"></i>
 
-                    </div>
+                                </button>
 
-                </aside>
+                                <button>
 
-                <div class="messages-container"> <!-- Contenitore Messaggi -->
+                                    <i class="fa-solid fa-message fa-lg"></i>
 
-                    <div class="header-messages-container flex ai-center">
+                                </button>
 
-                        <div class="main-profile-chat flex ai-center">
+                                <button>
 
-                            <img :src="'img/avatar' + contacts[currentContact].avatar + '.jpg'" :alt="'Foto profilo' + ' ' + contacts[currentContact].name ">
+                                    <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
 
-                            <div class="main-name-chat">
-
-                                <h2> {{ contacts[currentContact].name }}</h2>
-                                
-                                <span v-if="contacts[currentContact].messages.length > 0">{{'Ultimo accesso' + ' ' + contacts[currentContact].messages[contacts[currentContact].messages.length - 1].date}}</span>
+                                </button>
 
                             </div>
-                        
-                        </div>
-
-                        <div class="icon-container">
-
-                            <button>
-
-                                <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-
-                            </button>
-
-                            <button>
-
-                                <i class="fa-solid fa-paperclip fa-lg"></i>
-                            </button>
-
-                            <button>
-
-                                <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
-
-                            </button>
 
                         </div>
 
-                    </div>
+                        <div class="alert flex ai-center" :class="{'bg-alert-input': !(themeColor === false)}"> <!-- Contenitore Alert -->
 
-                    <div class="main-messages-container">
+                            <span :class="{'theme-color': !(themeColor === false)}">
 
-                        <ul class="flex">
-
-                            <li v-for="(item, index) in contacts[currentContact].messages" :class="{'flex align-end sent-mes': item.status === 'sent', 'flex align-start received-mes': item.status === 'received'}">
-                                
-                                <p> {{ item.message }} </p>
-                                
-                                <span class="arrow-down" >
-                                    
-                                    <i class="fa-solid fa-chevron-down"></i>
-
-                                    <div class="drop-menu-cancel-mes">
-
-                                        <p id="text-cancel-mes" @click="removeMessage(index)">Elimina messaggio</p>
-
-                                    </div>
-                                
-                                </span>
-                               
-                                <span> {{item.date}} </span>
-                            
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-                    <div class="footer-messages-container flex ai-center">
-
-                        <button>
-
-                            <i class="fa-regular fa-face-smile fa-xl"></i>
-
-                        </button>
-
-                        <div class="input-message">
-
-                            <span class="send-message-icon" @click="sendMessage()" v-if="typing">
-
-                                <i class="fa-solid fa-paper-plane"></i>
+                                <i class="fa-solid fa-bell-slash fa-xl" :class="{'theme-color': !(themeColor === false)}"></i>
 
                             </span>
 
-                            <input type="text" placeholder="Scrivi un messaggio..." v-model="myMessage" v-on:input="typing = true" @keyup.enter="sendMessage()">
+                            <div class="alert-text">
+                                
+                                <h2>Ricevi notifiche dei nuovi messaggi</h2>
+                                
+                                <a href="#">Attiva notifiche desktop</a>
+                                
+                            </div>
 
                         </div>
 
-                        <button>
+                        <div class="search-bar-container flex ai-center" :class="{'theme-color': !(themeColor === false)}"> <!-- Contenitore Search Bar -->
 
-                            <i class="fa-solid fa-microphone fa-xl"></i>
+                            <span :class="{'bg-alert-input': !(themeColor === false)}">
 
-                        </button>
+                                <i class="fa-solid fa-magnifying-glass"></i>
 
+                            </span>
+
+                            <input type="search" placeholder="Cerca o inizia una nuova chat" v-model="searchContact" :class="{'bg-alert-input': !(themeColor === false)}">
+
+                        </div>
+
+                        <div class="container-chats" :class="{'chats-dark': !(themeColor === false)}"> <!-- Contenitore Chats -->
+
+                            <ul>
+
+                                <li class="flex ai-center" v-for="(item, index) in filtredArray" @click="picInd(index)" :class="{'theme-color': !(themeColor === false)}">
+
+                                    <div class="profile-chat flex ai-center">
+                                        
+                                        <img :src="'img/avatar' + item.avatar + '.jpg'" :alt="'Foto profilo' + ' ' + item.name ">
+                                        
+                                        <div class="text-chat">
+                                            
+                                            <h2> {{ item.name }}</h2>
+                                            
+                                            <p v-if="item.messages.length > 0"> {{ item.messages[item.messages.length - 1].message }} </p>
+                                                                                
+                                        </div>
+                                        
+                                    </div>
+
+                                    <span v-if="item.messages.length > 0">{{myTime[index]}}</span>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </aside>
+
+                    <div class="messages-container"> <!-- Contenitore Messaggi -->
+
+                        <div class="header-messages-container flex ai-center" :class="{'theme-color': !(themeColor === false)}">
+
+                            <div class="main-profile-chat flex ai-center">
+
+                                <img :src="'img/avatar' + contacts[currentContact].avatar + '.jpg'" :alt="'Foto profilo' + ' ' + contacts[currentContact].name ">
+
+                                <div class="main-name-chat">
+
+                                    <h2> {{ contacts[currentContact].name }}</h2>
+                                    
+                                    <span v-if="contacts[currentContact].messages.length > 0">{{'Ultimo accesso' + ' ' + contacts[currentContact].messages[contacts[currentContact].messages.length - 1].date}}</span>
+
+                                </div>
+                            
+                            </div>
+
+                            <div class="icon-container">
+
+                                <button>
+
+                                    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+
+                                </button>
+
+                                <button>
+
+                                    <i class="fa-solid fa-paperclip fa-lg"></i>
+                                </button>
+
+                                <button>
+
+                                    <i class="fa-solid fa-ellipsis-vertical fa-lg"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="main-messages-container" :class="{'bg-img-dark': !(themeColor === false)}">
+
+                            <ul class="flex">
+
+                                <li v-for="(item, index) in contacts[currentContact].messages" :class="{'flex align-end sent-mes': item.status === 'sent', 'flex align-start received-mes': item.status === 'received'}">
+                                    
+                                    <p> {{ item.message }} </p>
+                                    
+                                    <span class="arrow-down" >
+                                        
+                                        <i class="fa-solid fa-chevron-down"></i>
+
+                                        <div class="drop-menu-cancel-mes">
+
+                                            <p id="text-cancel-mes" @click="removeMessage(index)">Elimina messaggio</p>
+
+                                        </div>
+                                    
+                                    </span>
+                                
+                                    <span> {{item.date}} </span>
+                                
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        <div class="footer-messages-container flex ai-center" :class="{'theme-color': !(themeColor === false)}">
+
+                            <button>
+
+                                <i class="fa-regular fa-face-smile fa-xl"></i>
+
+                            </button>
+
+                            <div class="input-message">
+
+                                <span class="send-message-icon" @click="sendMessage()" v-if="typing">
+
+                                    <i class="fa-solid fa-paper-plane"></i>
+
+                                </span>
+
+                                <input type="text" placeholder="Scrivi un messaggio..." v-model="myMessage" v-on:input="typing = true" @keyup.enter="sendMessage()" :class="{'bg-alert-input': !(themeColor === false)}">
+
+                            </div>
+
+                            <button>
+
+                                <i class="fa-solid fa-microphone fa-xl"></i>
+
+                            </button>
+
+                        </div>
+                        
                     </div>
                     
-                </div>
-                
-            </main> <!--Fine Main-->
+                </main> <!--Fine Main-->
+
+            </div>
             
         </div>
 

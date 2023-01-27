@@ -204,6 +204,12 @@ createApp({
 
             myTime: [],
 
+            themeColor: false,
+
+            showMenu: false,
+
+            counter: 0
+
         }
 
     },
@@ -279,6 +285,35 @@ createApp({
                 this.myTime.push(time)
                 
             }
+
+        },
+
+        colorChange () {  
+
+            if (this.counter == 0) {
+
+                this.showMenu = true;
+
+                this.counter = 1;
+
+            } else if (this.counter == 1) {
+
+                this.showMenu = false;
+
+                this.counter = 0;
+            }
+            
+        },
+
+        themeDark () {
+
+            this.themeColor = true;
+
+        },
+
+        themeLight () {
+
+            this.themeColor = false;
 
         }
 

@@ -30,3 +30,5 @@ permette di cancellare il messaggio selezionato
 BONUS
 
 - implementato bottone invio messaggio in alternativa al tasto "enter"
+
+- possibilità di cambiare tema (2 opzioni: tema chiaro e tema scuro) cliccando sulla palette in alto a sinistra
