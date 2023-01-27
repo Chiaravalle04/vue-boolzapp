@@ -24,6 +24,16 @@
     align-items: center;
 }
 
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background: #54656F;
+}
+
 .flex {
     display: flex;
 }
