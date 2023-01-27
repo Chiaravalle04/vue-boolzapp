@@ -29,8 +29,10 @@ permette di cancellare il messaggio selezionato
 
 BONUS
 
-- implementato bottone invio messaggio in alternativa al tasto "enter"
+- Implementato bottone invio messaggio in alternativa al tasto "enter"
 
-- possibilità di cambiare tema (2 opzioni: tema chiaro e tema scuro) cliccando sulla palette in alto a sinistra
+- Possibilità di cambiare tema (2 opzioni: tema chiaro e tema scuro) cliccando sulla palette in alto a sinistra
 
 - Modificata scrollbar
+
+- Simulatore di conversazione: se nell'input "send message" si inseriscono le domande: Come stai?, Come va?, Tutto bene?, Che fai?, Mi racconti una storia? (NB: devono essere inserite con la prima lettera maiuscola) l'utente virtuale risponderà in maniera randomica. Se si prova a salutare l'utente virtuale con termini come :Ciao, Salve, Buongiorno, Buonasera, Ei, lui farà lo stesso.

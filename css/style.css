@@ -276,8 +276,11 @@ aside {
 }
 
 .container-chats .profile-chat .text-chat p {
+    height: 38px;
     font-size: 14px;
     font-weight: 300;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .container-chats span {
@@ -368,6 +371,7 @@ aside {
 
 .main-messages-container ul li:hover .arrow-down {
     display: inline-block;
+    cursor: pointer;
 }
 
 .drop-menu-cancel-mes {

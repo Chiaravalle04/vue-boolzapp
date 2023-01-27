@@ -189,11 +189,11 @@
                                     
                                     <p> {{ item.message }} </p>
                                     
-                                    <span class="arrow-down" >
+                                    <span class="arrow-down" @click="dropMenuDeleteMes()">
                                         
                                         <i class="fa-solid fa-chevron-down"></i>
 
-                                        <div class="drop-menu-cancel-mes">
+                                        <div class="drop-menu-cancel-mes" v-if="menuDeleteMes">
 
                                             <p id="text-cancel-mes" @click="removeMessage(index)">Elimina messaggio</p>
 
